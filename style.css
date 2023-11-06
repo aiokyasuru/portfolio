@@ -173,43 +173,6 @@ main{
     border-bottom: 1px solid #B7B7B7;
 }
 
-/* .sample_container{
-    display:flex;
-    justify-content: space-between;
-    max-width:1024px;
-    margin:0 auto;
-}
-
-.sample_card{
-    width:25%;
-}
-
-.sample_inner{
-    width:90%;
-    margin:0 auto;
-}
-
-
-.sample_inner>img{
-    width:100%;
-    object-fit: cover;
-    vertical-align: bottom;
-}
-
-.sample_inner>h4{
-    background-color: #758BAF;
-    color:#fff;
-    font-size: 14px;
-    height: 30px;
-    line-height: 30px;
-}
-
-.sample_inner>p{
-    font-size: 12px;
-    text-align: left;
-    font-weight: normal;
-    margin-top:4px;  
-} */
 
 .portfolio_container{
     max-width:1300px;
@@ -228,8 +191,6 @@ main{
     border:1px solid #000;
     border-radius: 5px;
 }
-
-
 
 .portfolio_card>h4{
     background-color: #758BAF;
@@ -262,12 +223,12 @@ main{
     opacity:0.6;
 }
 
-.fadein{
+/* .fadein{
     opacity:0;
     transform: translate(0,50px);
     transition-duration: 500ms;
     transition-property: opacity, transform;
-}
+} */
 
 .active{
     opacity:1;
