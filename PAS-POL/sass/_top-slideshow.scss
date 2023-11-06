@@ -1,0 +1,41 @@
+$sp2:901px;
+
+@mixin media2{
+  @media screen and (min-width:($sp2)){
+    @content;
+  }
+}
+
+.slideshow{
+    text-align: center;
+    &__img{
+      height: 832px;
+      width:100%;
+      object-fit:cover;
+    }
+  }
+
+.sitelogo{
+  position:absolute;
+  top:45%;
+  left:50%;
+  width:197px;
+  height: 178px;
+  transform: translate(-50%,-50%);
+  @include media2{
+    display: none;
+  };
+  >img{
+    width:197px;
+    height: 178px;
+  }
+}
+
+.shape{
+  position: absolute;
+  bottom:-10px;
+  width:auto;
+  >img{
+    width:100%;
+  }
+}

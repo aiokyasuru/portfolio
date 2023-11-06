@@ -1,0 +1,63 @@
+$sp1:701px;
+$sp2:700px;
+
+@mixin media1{
+  @media screen and (min-width:($sp1)){
+    @content;
+  }
+}
+
+.sns-button{
+  display:block;
+  height: 46px;
+  font-size:13px;
+  line-height: 48px;
+  text-align: center;
+  font-family: "Gill Sans Std Book", sans-serif;
+  text-decoration: none;
+  border-width: 1px;
+  border-style: solid;
+  @include media1{
+    width:162px;
+  };
+}
+
+.face{
+  color: #4871a9;
+  border-color: #4871a9;
+  transition:all 0.3s ease;
+  &:hover{
+    color:#fff;
+    background-color: #4871a9;
+  }
+}
+
+.twit{
+  color: #70bdd3;
+  border-color: #70bdd3;
+  transition:all 0.3s ease;
+  &:hover{
+    color:#fff;
+    background-color: #70bdd3;
+  }
+}
+
+.hate{
+  color: #2f9bcd;
+  border-color: #2f9bcd;
+  transition:all 0.3s ease;
+  &:hover{
+    color:#fff;
+    background-color: #2f9bcd;
+  }
+}
+
+.line{
+  color: #8ec09d;
+  border-color: #8ec09d;
+  transition:all 0.3s ease;
+  &:hover{
+    color:#fff;
+    background-color: #8ec09d;
+  }
+}

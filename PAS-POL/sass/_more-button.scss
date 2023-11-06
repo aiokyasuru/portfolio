@@ -1,0 +1,73 @@
+$sp1:701px;
+$sp6:501px;
+
+@mixin media1{
+  @media screen and (min-width:($sp1)){
+    @content;
+  }
+}
+
+@mixin media5{
+  @media screen and (min-width:($sp6)){
+    @content;
+  }
+}
+
+.more-button{
+  width:162px;
+  height: 46px;
+  font-size:14px;
+  color:#13191b;
+  border:1px solid #13191b;
+  font-family: "Gill Sans Std Book", sans-serif;
+  line-height: 48px;
+  margin:0 auto;
+  position :relative;
+  transition:all 0.3s ease;
+  &:after{
+    content:'';
+    width:8px;
+    height: 8px;
+    border-right: 1px solid #13191b;
+    border-bottom:1px solid #13191b;
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform: translateY(-50%) rotate(-45deg);
+  }
+    &:hover{
+      background: #13191b;
+      color: #fff;
+      &::after{
+        border-color:#fff;
+    }
+  }
+}
+
+.l-button1{
+  display: none;
+  @include media5{
+    display:block;
+    margin:0;
+  }
+}
+
+.s-button1{
+  @include media5{
+    display:none;
+  };
+}
+
+.l-button2{
+  display: none;
+  @include media5{
+    display:block;
+    margin:0;
+  }
+}
+
+.s-button2{
+  @include media5{
+    display:none;
+  };
+}
