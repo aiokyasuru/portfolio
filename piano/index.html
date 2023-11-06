@@ -1,0 +1,265 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>簡易ピアノアプリ</title>
+    <style>
+        p{
+            height: 50px;
+            color:#4e4e4e;
+            font-size: 20px;;
+        }
+        .container{
+            width:350px;
+            margin:0 auto;
+            text-align: center;
+        }
+        #display{
+            width:80%;
+            background-color:rgb(1, 148, 1);
+            color:antiquewhite;
+            height: 100px;
+            line-height: 100px;
+            font-size:30px;
+            margin:20px auto;
+            border-radius: 10px;
+
+        }
+        #musical_scale{
+            width:100%;
+            display:flex;
+            justify-content: space-around;
+            margin-bottom:20px;
+        }
+
+        .keys{
+            border-top:solid 2px #808080;
+            border-right: solid 2px #808080;
+            border-left: solid 1px #808080;
+            border-bottom: solid rgb(230, 230, 230) 20px;
+            width:calc((100%/7) - 3px);
+            height: 180px;
+            padding-top:5%;
+            padding-bottom: 5%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            cursor: pointer;
+            z-index: 1;
+            box-shadow: 0 3px 2px 0 rgb(0 0 0 / 30%);
+            transition: all .3s ease-out;
+        }
+
+        /* 鍵盤が押されたときのスタイル */
+        .key_push{
+            width:calc((100% / 7) - 5px);
+            height: 195px;
+            border-top:solid 1px #808080;
+            border-right: solid 3px #808080;
+            border-left: solid 3px #808080;
+            border-bottom: solid rgba(230, 230, 230, 0.7) 5px;
+            background-color: #eee;
+            transition: all .3s ease-out;
+        }
+
+        .keys:first-child{
+            border-left: solid 2px #808080;
+        }
+
+        .black{
+                width:calc(350px /10);
+                height: 120px;
+                background-color: black;
+                margin-left: -19.5px;
+                margin-right: -19.5px;
+                z-index: 2;
+                border-bottom:solid 10px rgb(54, 54, 54);
+        }
+
+        .button{
+            width:150px;
+            height: 50px;
+            font-size: 18px;
+            background-color: rgb(1, 148, 1);
+            color: antiquewhite;
+            cursor: pointer;
+            border-radius: 10px;
+            border:none;
+            border-bottom: solid 4px rgb(1, 22, 1);
+        }
+
+        .button:active {
+            transform: translateY(4px);
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p></p>
+        <div id="display"></div>
+        <div id="musical_scale">
+            <div id="ド" data-tunekey="C4" class="keys">ド</div>
+            <div class="black"></div>
+            <div id="レ" data-tunekey="D4" class="keys">レ</div>
+            <div class="black"></div>
+            <div id="ミ" data-tunekey="E4" class="keys">ミ</div>
+            <div id="ファ" data-tunekey="F4" class="keys">ファ</div>
+            <div class="black"></div>
+            <div id="ソ" data-tunekey="G4" class="keys">ソ</div>
+            <div class="black"></div>
+            <div id="ラ" data-tunekey="A4" class="keys">ラ</div>
+            <div class="black"></div>
+            <div id="シ" data-tunekey="B4" class="keys">シ</div>
+        </div>
+        <input type="button" value="自動演奏" class="button" id="play_button">
+        <input type="button" value="mute" class="button" id="sound_button">
+    </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.min.js"></script>
+<script>
+
+        const keys = document.querySelectorAll('.keys');
+        const display = document.getElementById('display');
+        const play_button = document.getElementById('play_button');
+        const sound_button = document.getElementById('sound_button');
+        const show_title = document.querySelector('p');
+
+        //サウンドの設定
+        //Tone.jsをCDNで利用。
+        const piano = new Tone.Sampler({
+        urls: {
+            "C4": "C4.mp3",
+            "D#4": "Ds4.mp3",
+            "F#4": "Fs4.mp3",
+            "A4": "A4.mp3",
+        },
+        baseUrl: "https://tonejs.github.io/audio/salamander/",
+        }).toDestination();
+
+        //音声のオンオフを切り替え
+        function toggleSound(){
+            if(sound_button.value==='mute'){
+                sound_button.value = 'sound On';
+                piano.volume.value=-100;
+            }else{
+                sound_button.value = 'mute';
+                piano.volume.value = 0;
+            }
+        }
+
+        //手動演奏
+
+        let timer;
+        keys.forEach(key => {
+            key.addEventListener('click',()=>{
+                if(play_button.value==='自動演奏')
+                {
+                clearTimeout(timer);
+                key.classList.add('key_push');
+                display.textContent = key.textContent;
+                let tune_key = key.dataset.tunekey;
+                piano.triggerAttackRelease(tune_key,'4n');
+                setTimeout(()=>{
+                    key.classList.remove('key_push');
+                },300);
+                timer=setTimeout(()=>{
+                display.textContent="";
+                },1000);
+                }else{
+                    return;
+                }
+            });
+        });
+
+        //自動演奏
+
+        //ここはテキストのコピペ。
+        const star = "ド(0.5秒)休符(0.5秒)ド(0.5秒)休符(0.5秒)ソ(0.5秒)休符(0.5秒)ソ(0.5秒)休符(0.5秒)ラ(0.5秒)休符(0.5秒)ラ(0.5秒)休符(0.5秒)ソ(2秒)ファ(0.5秒)休符(0.5秒)ファ(0.5秒)休符(0.5秒)ミ(0.5秒)休符(0.5秒)ミ(0.5秒)休符(0.5秒)レ(0.5秒)休符(0.5秒)レ(0.5秒)休符(0.5秒)ド(2秒)ソ(0.5秒)休符(0.5秒)ソ(0.5秒)休符(0.5秒)ファ(0.5秒)休符(0.5秒)ファ(0.5秒)休符(0.5秒)ミ(0.5秒)休符(0.5秒)ミ(0.5秒)休符(0.5秒)レ(2秒)ソ(0.5秒)休符(0.5秒)ソ(0.5秒)休符(0.5秒)ファ(0.5秒)休符(0.5秒)ファ(0.5秒)休符(0.5秒)ミ(0.5秒)休符(0.5秒)ミ(0.5秒)休符(0.5秒)レ(2秒)ド(0.5秒)休符(0.5秒)ド(0.5秒)休符(0.5秒)ソ(0.5秒)休符(0.5秒)ソ(0.5秒)休符(0.5秒)ラ(0.5秒)休符(0.5秒)ラ(0.5秒)休符(0.5秒)ソ(2秒)ファ(0.5秒)休符(0.5秒)ファ(0.5秒)休符(0.5秒)ミ(0.5秒)休符(0.5秒)ミ(0.5秒)休符(0.5秒)レ(0.5秒)休符(0.5秒)レ(0.5秒)休符(0.5秒)ド(4秒)";
+        const tulip = "ド(0.5秒)レ(0.5秒)ミ(1秒)ド(0.5秒)レ(0.5秒)ミ(1秒)ソ(0.5秒)ミ(0.5秒)レ(0.5秒)ド(0.5秒)レ(0.5秒)ミ(0.5秒)レ(1秒)ド(0.5秒)レ(0.5秒)ミ(1秒)ド(0.5秒)レ(0.5秒)ミ(1秒)ソ(0.5秒)ミ(0.5秒)レ(0.5秒)ド(0.5秒)レ(0.5秒)ミ(0.5秒)ド(1秒)ソ(0.25秒)休符(0.25秒)ソ(0.25秒)休符(0.25秒)ミ(0.25秒)休符(0.25秒)ソ(0.25秒)休符(0.25秒)ラ(0.25秒)休符(0.25秒)ラ(0.25秒)休符(0.25秒)ソ(1秒)ミ(0.25秒)休符(0.25秒)ミ(0.25秒)休符(0.25秒)レ(0.25秒)休符(0.25秒)レ(0.25秒)休符(0.25秒)ド(4秒)";
+        let musics;
+        let i;
+        let end;
+        let music_title;
+        let dur;
+
+        //曲をランダムに選び、曲のテキストを配列に変換し、autoPlayに渡す。
+        function randomPlay(){
+            if(Math.floor(Math.random()*2)==0){
+                musics = star;
+                music_title = 'きらきら星';
+                dur = '3n';
+            }else{
+                musics =tulip;
+                music_title ='チューリップ';
+                dur = '8n';
+            }
+
+            musics = musics.replace(/休符/g," ");
+            musics =musics.split('秒)')
+            musics.pop();
+            musics.push(' (0.0');
+
+            i = 0;
+            play_button.value= '演奏中止';
+            end=musics.length;
+            show_title.textContent= `自動演奏中です：${music_title}`;
+
+            autoPlay();
+        }
+
+        //配列の要素から音階と秒数を取得し、ループで演奏
+        function autoPlay(){
+            let music = musics[i].split('(');
+            let note;
+            let sec;
+            [note,sec]=music;
+            let interval = sec*1000;
+            const target_key=document.getElementById(note);
+            let tune_key;
+          
+            if(note != " "){
+            tune_key = target_key.dataset.tunekey;
+            target_key.classList.add('key_push');
+            piano.triggerAttackRelease(tune_key,dur);
+            new Promise((resolve, reject) => {
+            const key_timeout = setTimeout(() => {
+                target_key.classList.remove('key_push');
+                resolve();
+                clearTimeout(key_timeout);
+                }, 150);
+              });
+            }
+
+            display.textContent = note;
+            i++;
+            
+            const timeout = setTimeout(autoPlay,interval);
+            
+            if(i>=end || play_button.value==='自動演奏'){
+                clearTimeout(timeout);
+                play_button.value= '自動演奏';
+                target_key.classList.remove('key_push');
+                display.textContent ="";
+                show_title.textContent="";
+                i=0;
+            }
+        }
+            
+        //自動演奏と手動演奏を切り替え
+        function togglePlay(){
+            if(play_button.value ==='自動演奏'){
+                randomPlay();                
+            }else{
+                play_button.value ='自動演奏';
+            }
+        }
+
+        play_button.addEventListener('click',togglePlay);
+        sound_button.addEventListener('click',toggleSound);
+
+</script>
+</body>
+</html>
