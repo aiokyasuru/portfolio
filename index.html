@@ -1,12 +1,174 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="jp">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Example Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Masashi Shimizu's Portfolio</title>
 </head>
 <body>
-    <h1>Hello GitHub.io !</h1>
+
+    <div class="container">
+
+        <header>
+                    <h1>Masashi Shimizu’s Portfolio</h1>
+                    <ul class="header_ul">
+                        <li><a href="#self_introduction">自己紹介</a></li>
+                        <li><a href="#sample">実装サンプル</a></li>
+                    </ul> 
+
+                    <!-- ナビメニュー部分 -->
+                    <div class="hamburger">  
+                    <nav id="NavMenu">
+                        <ul>
+                        <li><a href="#self_introduction">自己紹介</a></li>
+                        <li><a href="#sample">実装サンプル</a></li>
+                        </ul>
+                    </nav>
+                    <!-- ハンバーガーメニュー部分 -->
+                    <div id="Toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                    <div class="clear"></div>
+        </header>
+                <div class="mainimg"></div>
+
+        <main>
+
+            <div id="self_introduction" class="anchor">
+                <h2 class="main_title">自己紹介<span class="main_subtitle">Self Introduction</span></h2>
+                <p>私の名前は<span class="bold">清水昌志</span>と申します。大阪府大阪市出身で３歳の時三重県伊勢市に引っ越し高校まで過ごし、
+                    その後は名古屋で生活しています。前職では個人事業主でWebコンサルタントやWebマーケティングツールの営業をしておりました。
+                    2022年4月に発達障害の診断を受けたことから働き方を見直し、
+                    現在は就業支援施設にて、プログラミング学習に取り組んでおります。
+                    実務経験のあるサポートスタッフからは「バックエンド、フロントエンド共に即戦力の技能」との評価をいただいております。
+                    新しい職場でもこれまでの経験やスキルを活かしたいと思っております。どうぞよろしくお願いします。</p>
+                <img src="images/img01.jpg" alt="寂しい木" class="img01 fadein">
+
+
+                <div class="self_introduction_container">
+
+                    <div class="self_introduction_box fadein">
+                        <h3 class="box_title">フロントエンドスキル<span class="box_subtitle">Front End</span></h3>
+                            <div class="box_inner">
+                                <p class="box_txt box_txt01">・HTML/CSS</p>
+                                <p class="box_txt box_txt01">・Sass/Bootstrap</p>
+                                <p class="box_txt box_txt01">・Javascript</p>
+                                </div>
+                    </div><!--self_introduction_box-->
+                    
+                    <div class="self_introduction_box fadein">
+                        <h3 class="box_title">バックエンドスキル<span class="box_subtitle">Back End</span></h3>
+                            <div class="box_inner">
+                                <p class="box_txt box_txt02">・PHP/larevel</p>
+                                <p class="box_txt box_txt02">・MySQL</p>
+                                <p class="box_txt box_txt02">・Word Press</p>
+                            </div>
+                    </div><!--self_introduction_box-->
+
+                </div><!--self_introduction_container-->
+
+            </div><!--self_introduction-->
+
+            <div id="sample" class="anchor">
+
+                <h2 class="main_title fadein">実装サンプル<span class="main_subtitle">Sample</span></h2>
+
+                <h3 class="green_title fadein">ポートフォリオ</h3>
+
+                <div class="portfolio_container">
+
+                    <div class="portfolio_box">
+                        <div class="portfolio_card fadein">
+                            <h4>HTML/CSS 喫茶店のホームページ</h4>
+                            <div class="portfolio_inner">
+                                <a href="/nagoya/0002/htdocs/cafe" target="blank">
+                                <img src="images/cafe.png" alt="カフェ">
+                            </a>
+                            </div>
+                            <p>架空のカフェショップのホームページ例です。<br>
+                                gulpとSassを使用してマークアップしています。
+                            </p>
+                        </div>
+    
+                        <div class="portfolio_card fadein">
+                            <h4>HTML/CSS 既存ホームページの模写</h4>
+                            <div class="portfolio_inner">
+                                <a href="/nagoya/0002/htdocs/PAS-POL" target="blank">
+                                <img src="images/PAS-POL.png" alt="模写">
+                            </a>
+                            </div>
+                            <p>有名ホームページの模写です。<br>
+                                オリジナルは<a href="https://pas-pol.jp/" target="blank">こちら</a>
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="portfolio_box">
+                        <div class="portfolio_card fadein">
+                            <h4>Javascript ピアノアプリ</h4>
+                            <div class="portfolio_inner">
+                                <a href="/nagoya/0002/htdocs/js" target="blank">
+                                <img src="images/piano01.png" alt="ピアノアプリ">
+                            </a>
+                            </div>
+                            <p>自動演奏と手動演奏を切り替えられるピアノアプリです。</p>
+                        </div>
+    
+                        <div class="portfolio_card fadein">
+                            <h4>PHP/MySQL ECサイト</h4>
+                            <div class="portfolio_inner">
+                                <a href="/nagoya/0002/ec_site/index.php" target="blank">
+                                <img src="images/ec_site01.png" alt="ECサイト">
+                                </a>
+                            </div>
+                            <p>管理者とユーザーログイン機能のあるECサイトです。<br>
+                            一部にJavaScriptによる非同期通信を使用、Bootstrapでスタイルをつけています。</p>
+                        </div>
+
+                    </div>
+
+                    <div class="portfolio_box">
+                        <div class="portfolio_card fadein">
+                            <h4>Word Press</h4>
+                            <div class="portfolio_inner">
+                                <a href="https://portfolio.dc-itex.com/nagoya/0002/wp/" target="blank">
+                                <img src="images/wordpress.png" alt="WordPress">
+                                </a>
+                            </div>
+                            <p>HTMLファイルからオリジナルテーマを作成しています。</p>
+                        </div>
+    
+                        <div class="portfolio_card fadein">
+                            <h4>Laravel 社員管理システム</h4>
+                            <div class="portfolio_inner">
+                                <!-- <a href="http://manageapp-env-1.eba-u53xhctp.ap-northeast-1.elasticbeanstalk.com/" target="blank"> -->
+                                <a href="https://manageapp.site/" target="blank">
+                                <img src="images/ManageApp.png" alt="社員管理システム">
+                                </a>
+                            </div>
+                            <p>出勤記録から給与を自動計算する社員管理システムです。<br>
+                            AWSのCloud9上でlaravelで開発、AWSのEC2にデプロイしています。</p>
+                        </div>
+    
+                    </div>
+
+                    </div>
+            </div><!--sample-->
+   
+        </main>
+
+        <footer>
+            <small>Copyright © 2023 Masashi Shimizu</small>
+        </footer>       
+    
+    </div><!--container-->
+<script src="main.js"></script>
 </body>
 </html>
