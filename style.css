@@ -125,9 +125,7 @@ main{
     width:48%;
     background-color: #8AB3DC;
     border-radius: 10px;
-    /* margin: 0 auto; */
     color:#fff;
-    /* padding:30px; */
 }
 
 .box_title{
@@ -172,7 +170,6 @@ main{
     padding-bottom:3px;
     border-bottom: 1px solid #B7B7B7;
 }
-
 
 .portfolio_container{
     max-width:1300px;
@@ -223,12 +220,12 @@ main{
     opacity:0.6;
 }
 
-/* .fadein{
+.fadein{
     opacity:0;
     transform: translate(0,50px);
     transition-duration: 500ms;
     transition-property: opacity, transform;
-} */
+}
 
 .active{
     opacity:1;
